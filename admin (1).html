@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel - Amar SunarBangla</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      padding: 20px;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input[type=text], input[type=password] {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #d4af37;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .hidden {
+      display: none;
+    }
+    h2 {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container" id="loginDiv">
+  <h2>Admin Login</h2>
+  <input type="text" id="username" placeholder="Username" />
+  <input type="password" id="password" placeholder="Password" />
+  <button onclick="login()">Login</button>
+</div>
+
+<div class="container hidden" id="adminPanel">
+  <h2>Welcome, Admin!</h2>
+  <h3>Add New Product</h3>
+  <input type="text" id="productName" placeholder="Product Name" />
+  <input type="text" id="productPrice" placeholder="Product Price" />
+  <input type="text" id="productImage" placeholder="Image URL" />
+  <button onclick="addProduct()">Add Product</button>
+  <div id="productList"></div>
+</div>
+
+<script>
+  function login() {
+    const user = document.getElementById('username').value;
+    const pass = document.getElementById('password').value;
+    if (user === 'admin' && pass === '1234') {
+      document.getElementById('loginDiv').classList.add('hidden');
+      document.getElementById('adminPanel').classList.remove('hidden');
+    } else {
+      alert('Wrong username or password!');
+    }
+  }
+
+  function addProduct() {
+    const name = document.getElementById('productName').value;
+    const price = document.getElementById('productPrice').value;
+    const image = document.getElementById('productImage').value;
+    const productHTML = \`
+      <div style="border:1px solid #ccc; margin-top:10px; padding:10px;">
+        <img src="\${image}" width="100%"><br>
+        <strong>\${name}</strong><br>
+        Price: \${price}
+      </div>
+    \`;
+    document.getElementById('productList').innerHTML += productHTML;
+  }
+</script>
+
+</body>
+</html>
